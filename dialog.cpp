@@ -7,9 +7,15 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // QT 4
-    QObject::connect(ui->numSlider, SIGNAL(valueChanged(int)), ui->numLabel, SLOT(setNum(int)));
-    //               sending        signal function            recieving     slot function
+//    // QT 4
+//    QObject::connect(ui->numSlider, SIGNAL(valueChanged(int)), ui->numLabel, SLOT(setNum(int)));
+//    //               sending        signal function            recieving     slot function
+
+    // QT 5
+    QObject::connect(ui->numSlider, &QSlider::valueChanged, ui->numLabel, static_cast<void (QLabel::*)(int)>(&QLabel::setNum));
+    //               sending        signal function         recieving     slot function (static cast used to
+    //                                                                                   differentiate btwn int and
+    //                                                                                   float overloads)
 }
 
 Dialog::~Dialog()
