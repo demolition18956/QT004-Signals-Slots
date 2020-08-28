@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::Dialog *ui;
+
+signals:
+    void foo();
+
+public slots:
+    void bar();
 };
 
 #endif // DIALOG_H
